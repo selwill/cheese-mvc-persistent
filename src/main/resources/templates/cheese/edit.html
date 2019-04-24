@@ -23,12 +23,13 @@
         <select name="categoryId">
             <option th:each="category : ${categories}"
                     th:text="${category.name}"
-                    th:value="${category.id}"></option>
+                    th:value="${category.id}"
+                    th:selected="${category.id == cheese.category.id}"></option>
         </select>
     </div>
 
-    <input type="submit" value="Add Cheese" />
+    <input type="submit" value="Edit Cheese" />
 </form>
 
 </body>
-</html></html>
+</html>
