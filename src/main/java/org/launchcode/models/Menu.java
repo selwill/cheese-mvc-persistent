@@ -6,15 +6,11 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.List;
-
-
-
-
 
 @Entity
 public class Menu {
-
     @Id
     @GeneratedValue
     private int id;
@@ -24,20 +20,13 @@ public class Menu {
     private String name;
 
     @ManyToMany
-    private List<Cheese> cheeses;
-
-    public Menu() {    }
+    private List<Cheese> cheeses = new ArrayList<>();
 
     public Menu(String name) {
         this.name = name;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public Menu() {
     }
 
     public int getId() {
@@ -48,6 +37,14 @@ public class Menu {
         this.id = id;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public List<Cheese> getCheeses() {
         return cheeses;
     }
@@ -55,7 +52,5 @@ public class Menu {
     public void addItem(Cheese item) {
         cheeses.add(item);
     }
-
-
 
 }

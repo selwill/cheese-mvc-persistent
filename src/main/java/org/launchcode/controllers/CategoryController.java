@@ -12,40 +12,34 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
 
-
 @Controller
 @RequestMapping("category")
 public class CategoryController {
-
     @Autowired
     private CategoryDao categoryDao;
 
-    // Request path: /cheese
-    @RequestMapping(value = "")
+    @RequestMapping(value="")
     public String index(Model model) {
-
+        model.addAttribute("title", "My Categories");
         model.addAttribute("categories", categoryDao.findAll());
-        model.addAttribute("title", "Categories");
-
         return "category/index";
     }
 
-    @RequestMapping(value = "add", method = RequestMethod.GET)
+    @RequestMapping(value="add", method = RequestMethod.GET)
     public String add(Model model) {
-
-        model.addAttribute("title", "Category");
-        model.addAttribute("category", new Category());
+        model.addAttribute(new Category());
+        model.addAttribute("title", "Add Category");
         return "category/add";
     }
 
-    @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String add(Model model,
-                      @ModelAttribute @Valid Category category, Errors errors) {
-
+    @RequestMapping(value="add", method = RequestMethod.POST)
+    public String add(Model model, @ModelAttribute @Valid Category category, Errors errors) {
         if (errors.hasErrors()) {
             return "category/add";
         }
-        categoryDao.save(category);
-        return "redirect:";
+        else {
+            categoryDao.save(category);
+            return "redirect:/category";
+        }
     }
 }
