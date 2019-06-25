@@ -3,15 +3,16 @@ package org.launchcode.models;
 /**
  * Created by LaunchCode
  */
-public enum CheeseType {
+public enum MediaType {
 
-    HARD ("Hard"),
-    SOFT ("Soft"),
-    FAKE ("Fake");
+    BOOK  ("Book"),
+    MOVIE ("Movie"),
+    MUSIC ("Music"),
+    VIDEO-GAME ("Video-game");
 
     private final String name;
 
-    CheeseType(String name) {
+    MediaType(String name) {
         this.name = name;
     }
 

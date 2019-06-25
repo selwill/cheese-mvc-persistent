@@ -20,64 +20,64 @@ import java.util.List;
  * Created by LaunchCode
  */
 @Controller
-@RequestMapping("cheese")
-public class CheeseController {
+@RequestMapping("media")
+public class TrackController {
 
     @Autowired
-    private CheeseDao cheeseDao;
+    private MediaDao mediaDao;
 
     @Autowired
     private CategoryDao categoryDao;
 
-    // Request path: /cheese
+    // Request path: /media
     @RequestMapping(value = "")
     public String index(Model model) {
 
-        model.addAttribute("cheeses", cheeseDao.findAll());
-        model.addAttribute("title", "My Cheeses");
+        model.addAttribute("media", mediaDao.findAll());
+        model.addAttribute("title", "My Media");
 
-        return "cheese/index";
+        return "media/index";
     }
 
     @RequestMapping(value = "add", method = RequestMethod.GET)
-    public String displayAddCheeseForm(Model model) {
+    public String displayAddMediaForm(Model model) {
 
-        model.addAttribute("title", "Add Cheese");
-        model.addAttribute(new Cheese());
+        model.addAttribute("title", "Add Media");
+        model.addAttribute(new Media());
         model.addAttribute("categories", categoryDao.findAll());
-        return "cheese/add";
+        return "media/add";
     }
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String processAddCheeseForm(@ModelAttribute  @Valid Cheese newCheese,
+    public String processAddMediaForm(@ModelAttribute  @Valid Media newMedia,
                                        Errors errors, @RequestParam int
                                                categoryId, Model model) {
 
 
         if (errors.hasErrors()) {
-            model.addAttribute("title", "Add Cheese");
+            model.addAttribute("title", "Add Media");
             model.addAttribute("categories", categoryDao.findAll());
-            return "cheese/add";
+            return "media/add";
         }
 
         Category cat = categoryDao.findOne(categoryId);
-        newCheese.setCategory(cat);
-        cheeseDao.save(newCheese);
+        newMedia.setCategory(cat);
+        mediaDao.save(newMedia);
         return "redirect:";
     }
 
     @RequestMapping(value = "remove", method = RequestMethod.GET)
-    public String displayRemoveCheeseForm(Model model) {
-        model.addAttribute("cheeses", cheeseDao.findAll());
-        model.addAttribute("title", "Remove Cheese");
-        return "cheese/remove";
+    public String displayRemoveMediaForm(Model model) {
+        model.addAttribute("media", cheeseDao.findAll());
+        model.addAttribute("title", "Remove Media");
+        return "media/remove";
     }
 
     @RequestMapping(value = "remove", method = RequestMethod.POST)
-    public String processRemoveCheeseForm(@RequestParam int[] cheeseIds) {
+    public String processRemoveMediaForm(@RequestParam int[] mediaIds) {
 
-        for (int cheeseId : cheeseIds){
-            cheeseDao.delete(cheeseId);
+        for (int mediaId : mediaIds){
+            mediaDao.delete(mediaId);
         }
 
         return "redirect:";
@@ -87,10 +87,10 @@ public class CheeseController {
     public String category(Model model, @RequestParam int id){
 
         Category cat = categoryDao.findOne(id);
-        List<Cheese> cheeses = cat.getCheeses();
-        model.addAttribute("cheeses", cheeses);
-        model.addAttribute("title", "Cheeses in Category: " + cat.getName());
-        return "cheese/index";
+        List<Media> medias = cat.getMedias();
+        model.addAttribute("medias", medias);
+        model.addAttribute("title", "Medias in Category: " + cat.getName());
+        return "media/index";
     }
 
 }

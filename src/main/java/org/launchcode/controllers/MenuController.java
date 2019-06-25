@@ -1,8 +1,8 @@
 package org.launchcode.controllers;
 
-import org.launchcode.models.Cheese;
+import org.launchcode.models.Media;
 import org.launchcode.models.Menu;
-import org.launchcode.models.data.CheeseDao;
+import org.launchcode.models.data.MediaDao;
 import org.launchcode.models.data.MenuDao;
 import org.launchcode.models.forms.AddMenuItemForm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ public class MenuController {
     private MenuDao menuDao;
 
     @Autowired
-    private CheeseDao cheeseDao;
+    private MediaDao mediaDao;
 
     @RequestMapping(value="")
     public String index(Model model) {
@@ -75,8 +75,8 @@ public class MenuController {
         //Menu menu = menuDao.findOne(addMenuItemForm.getMenuId());
         //Cheese cheese = cheeseDao.findOne(addMenuItemForm.getCheeseId());
         Menu menu = menuDao.findOne(menuId);
-        Cheese cheese = cheeseDao.findOne(cheeseId);
-        menu.addItem(cheese);
+        Media media = mediaDao.findOne(mediaId);
+        menu.addItem(media);
         menuDao.save(menu);
 
         return "redirect:/menu/view/" + menu.getId();

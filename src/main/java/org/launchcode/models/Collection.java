@@ -20,7 +20,7 @@ public class Menu {
     private String name;
 
     @ManyToMany
-    private List<Cheese> cheeses = new ArrayList<>();
+    private List<Media> medias = new ArrayList<>();
 
     public Menu(String name) {
         this.name = name;
@@ -45,12 +45,12 @@ public class Menu {
         this.name = name;
     }
 
-    public List<Cheese> getCheeses() {
-        return cheeses;
+    public List<Media> getMedias() {
+        return medias;
     }
 
-    public void addItem(Cheese item) {
-        cheeses.add(item);
+    public void addItem(Media item) {
+        medias.add(item);
     }
 
 }
