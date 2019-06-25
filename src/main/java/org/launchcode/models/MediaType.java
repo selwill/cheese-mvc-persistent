@@ -8,7 +8,7 @@ public enum MediaType {
     BOOK  ("Book"),
     MOVIE ("Movie"),
     MUSIC ("Music"),
-    VIDEO-GAME ("Video-game");
+    VIDEOGAME ("Video game");
 
     private final String name;
 

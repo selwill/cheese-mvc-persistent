@@ -1,9 +1,9 @@
 package org.launchcode.controllers;
 
 import org.launchcode.models.Category;
-import org.launchcode.models.Cheese;
+import org.launchcode.models.Media;
 import org.launchcode.models.data.CategoryDao;
-import org.launchcode.models.data.CheeseDao;
+import org.launchcode.models.data.MediaDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +21,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("media")
-public class TrackController {
+public class MediaController {
 
     @Autowired
     private MediaDao mediaDao;
@@ -68,7 +68,7 @@ public class TrackController {
 
     @RequestMapping(value = "remove", method = RequestMethod.GET)
     public String displayRemoveMediaForm(Model model) {
-        model.addAttribute("media", cheeseDao.findAll());
+        model.addAttribute("media", mediaDao.findAll());
         model.addAttribute("title", "Remove Media");
         return "media/remove";
     }

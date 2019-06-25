@@ -25,7 +25,7 @@ public class AddMediaItemForm {
     public AddMediaItemForm() {
     }
 
-    public Colllection getCollection() {
+    public Collection getCollection() {
         return collection;
     }
 

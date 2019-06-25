@@ -40,7 +40,7 @@ public class Category {
         this.name = name;
     }
 
-    public List<Cheese> getMedias() {
+    public List<Media> getMedias() {
         return medias;
     }
 }

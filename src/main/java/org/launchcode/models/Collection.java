@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Menu {
+public class Collection {
     @Id
     @GeneratedValue
     private int id;
@@ -22,11 +22,11 @@ public class Menu {
     @ManyToMany
     private List<Media> medias = new ArrayList<>();
 
-    public Menu(String name) {
+    public Collection(String name) {
         this.name = name;
     }
 
-    public Menu() {
+    public Collection() {
     }
 
     public int getId() {
