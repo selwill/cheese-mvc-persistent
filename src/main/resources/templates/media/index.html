@@ -5,7 +5,7 @@
 <h1 th:text="${title}">Default Title</h1>
 <nav th:replace="fragments :: navigation"></nav>
 
-<p th:unless="${cheeses} and ${cheeses.size()}">No Cheese :(</p>
+<p th:unless="${medias} and ${medias.size()}">No Media :(</p>
 
 <table class="table">
     <tr>
@@ -14,16 +14,16 @@
         <th>Category</th>
     </tr>
 
-    <tr th:each="cheese : ${cheeses}">
-        <td th:text="${cheese.name}"></td>
-        <td th:text="${cheese.description}"></td>
-        <td th:text="${cheese.category.name}"></td>
+    <tr th:each="media : ${medias}">
+        <td th:text="${media.name}"></td>
+        <td th:text="${media.description}"></td>
+        <td th:text="${media.category.name}"></td>
     </tr>
 
 </table>
 
-<a href="/cheese/add"> Add </a> |
-<a href="/cheese/remove"> Remove </a>
+<a href="/media/add"> Add </a> |
+<a href="/media/remove"> Remove </a>
 
 </body>
 </html>

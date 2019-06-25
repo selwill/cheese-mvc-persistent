@@ -10,14 +10,14 @@
 
         <div class="container body-content">
 
-            <form th:object="${menu}" method="post">
+            <form th:object="${collection}" method="post">
 
                 <div class="form-group" th:classappend="${#fields.hasErrors('name') ? 'has-error' : ''}" >
                     <label th:for="name">Name</label>
                     <input type="text" class="form-control" th:field="*{name}"/>
                     <span th:errors="*{name}"></span>
                 </div>
-                <input type="submit" value="Add Menu" />
+                <input type="submit" value="Add Collection" />
             </form>
 
         </div>

@@ -9,10 +9,10 @@
         <nav th:replace="fragments :: navigation"></nav>
 
         <ul>
-            <li th:each="cheese: ${menu.cheeses}" th:text="${cheese.name}"></li>
+            <li th:each="media: ${collection.medias}" th:text="${media.name}"></li>
         </ul>
 
-        <p><a th:href="'/menu/add-item/' + ${menu.id}">Add Cheese</a></p>
+        <p><a th:href="'/collection/add-item/' + ${collection.id}">Add Media</a></p>
 
     </body>
 </html>

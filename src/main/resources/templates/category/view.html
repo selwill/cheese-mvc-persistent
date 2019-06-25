@@ -11,11 +11,11 @@
 
 <form method="post" style="max-width:600px;" th:object="${category}" action="/category/view">
     <ul>
-        <li th:each="cheese : ${category.cheeses}">
-            <span th:text="${cheese.name}"></span>
+        <li th:each="media : ${category.medias}">
+            <span th:text="${media.name}"></span>
         </li>
     </ul>
-    <p th:unless="${category.cheeses.size()}">No Cheese :(</p>
+    <p th:unless="${category.medias.size()}">No Media :(</p>
 
 </form>
 </body>

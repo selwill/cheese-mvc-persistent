@@ -9,12 +9,12 @@
         <nav th:replace="fragments :: navigation"></nav>
 
         <ul>
-            <li th:each="menu: ${menus}">
-                <a th:href="@{'/menu/view/' + ${menu.id}}" th:text="${menu.name}"></a>
+            <li th:each="collection: ${collections}">
+                <a th:href="@{'/collection/view/' + ${collection.id}}" th:text="${collection.name}"></a>
             </li>
         </ul>
 
-        <a th:href="@{'/menu/add/'}">Add Menu</a>
+        <a th:href="@{'/collection/add/'}">Add Collection</a>
 
     </body>
 </html>
