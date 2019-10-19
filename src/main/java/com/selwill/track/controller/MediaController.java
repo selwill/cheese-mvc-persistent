@@ -51,16 +51,15 @@ public class MediaController {
         model.setViewName("media_form");
         return model;
     }
-
-    //@RequestMapping(value="/save", method=RequestMethod.POST)
-    //public ModelAndView saveOrUpdate(@ModelAttribute("mediaForm") Media media) {
-    //    if (media.getMediaId() != null) {
-    //        mediaService.updateMedia(media);
-    //    }
-    //    else {
-    //        mediaService.addMedia(media);
-    //    }
-    //}
+    @RequestMapping(value="/save", method=RequestMethod.POST)
+    public ModelAndView saveOrUpdate(@ModelAttribute("mediaForm") Media media) {
+        if (media.getMediaId() != null) {
+            mediaService.updateMedia(media);
+        }
+        else {
+            mediaService.addMedia(media);
+        }
+    }
 
     @RequestMapping(value="/delete/{id}", method=RequestMethod.GET)
     public ModelAndView deleteMedia(@PathVariable("id") int id) {
