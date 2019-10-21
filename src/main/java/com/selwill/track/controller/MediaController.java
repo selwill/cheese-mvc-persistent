@@ -11,60 +11,57 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.selwill.track.model.Media;
-import com.selwill.track.service.MediaServiceImpl;
+import com.selwill.track.service.MediaService;
 
 @Controller
-@RequestMapping("/media")
+@RequestMapping(value="/home/media")
 public class MediaController {
 
     @Autowired
-    private MediaServiceImpl mediaService;
+    MediaService mediaService;
 
-    @RequestMapping(value= {"/", "/list"}, method=RequestMethod.GET)
-    public ModelAndView getAllMedias() {
-        ModelAndView model = new ModelAndView();
-        List<Media> list = mediaService.getAllMedias();
+    @RequestMapping(value="/list", method=RequestMethod.GET)
+    public ModelAndView list() {
+        ModelAndView model = new ModelAndView("media_list");
+        List<Media> mediaList = mediaService.getAllMedias();
+        model.addObject("mediaList", mediaList);
 
-        model.addObject("media_list", list);
-        model.setViewName("media_list");
         return model;
     }
 
-    @RequestMapping(value="/update/{id}", method=RequestMethod.GET)
-    public ModelAndView editMedia(@PathVariable int id) {
-        ModelAndView model = new ModelAndView();
-
-        Media media = new Media();
-        model.addObject("mediaForm", media);
-
-        model.setViewName("media_form");
-        return model;
-    }
-
-    @RequestMapping(value="/add", method=RequestMethod.GET)
+    @RequestMapping(value="/addMedia/", method=RequestMethod.GET)
     public ModelAndView addMedia() {
         ModelAndView model = new ModelAndView();
 
         Media media = new Media();
         model.addObject("mediaForm", media);
-
         model.setViewName("media_form");
+
         return model;
     }
-    @RequestMapping(value="/save", method=RequestMethod.POST)
-    public ModelAndView saveOrUpdate(@ModelAttribute("mediaForm") Media media) {
-        if (media.getMediaId() != null) {
-            mediaService.updateMedia(media);
-        }
-        else {
-            mediaService.addMedia(media);
-        }
+
+    @RequestMapping(value="/updateMedia/{id}", method=RequestMethod.GET)
+    public ModelAndView editMedia(@PathVariable long id) {
+        ModelAndView model = new ModelAndView();
+
+        Media media = mediaService.getMediaById(id);
+        model.addObject("mediaForm", media);
+        model.setViewName("media_form");
+
+        return model;
     }
 
-    @RequestMapping(value="/delete/{id}", method=RequestMethod.GET)
-    public ModelAndView deleteMedia(@PathVariable("id") int id) {
+    @RequestMapping(value="/saveMedia", method=RequestMethod.POST)
+    public ModelAndView save(@ModelAttribute("mediaForm") Media media) {
+        mediaService.saveOrUpdate(media);
+
+        return new ModelAndView("redirect:/home/media/list");
+    }
+
+    @RequestMapping(value="/deleteMedia/{id}", method=RequestMethod.GET)
+    public ModelAndView delete(@PathVariable("id") long id) {
         mediaService.deleteMedia(id);
 
-        return new ModelAndView("redirect:/media/list");
+        return new ModelAndView("redirect:/home/media/list");
     }
 }

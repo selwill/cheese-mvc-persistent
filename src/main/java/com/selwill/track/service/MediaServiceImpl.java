@@ -4,39 +4,36 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.selwill.track.dao.MediaDaoImpl;
 import com.selwill.track.model.Media;
+import com.selwill.track.repository.MediaRepository;
 
 @Service
+@Transactional
 public class MediaServiceImpl implements MediaService {
 
     @Autowired
-    private MediaDaoImpl mediaDao;
+    MediaRepository mediaRepository;
 
     @Override
     public List<Media> getAllMedias() {
-        return mediaDao.getAllMedias();
+        return (List<Media>) mediaRepository.findAll();
     }
 
     @Override
-    public Media findMediaById(int id) {
-        return mediaDao.findMediaById(id);
+    public Media getMediaById(long id) {
+        return mediaRepository.findById(id).get();
     }
 
     @Override
-    public void addMedia(Media media) {
-        mediaDao.addMedia(media);
+    public void saveOrUpdate(Media media) {
+        mediaRepository.save(media);
     }
 
     @Override
-    public void updateMedia(Media media) {
-        mediaDao.updateMedia(media);
-    }
-
-    @Override
-    public void deleteMedia(int id) {
-        mediaDao.deleteMedia(id);
+    public void deleteMedia(long id) {
+        mediaRepository.deleteById(id);
     }
 
 }
